@@ -3,9 +3,12 @@ import { useSpring, a } from "@react-spring/web";
 import useMeasure from "react-use-measure";
 import { Container, Title, Frame, Content, toggle } from "./styles";
 import * as Icons from "./icons";
-
-import logo from './logo.svg';
 import './App.css';
+
+
+
+
+
 
 function usePrevious<T>(value: T) {
   const ref = useRef<T>();
