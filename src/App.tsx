@@ -1,13 +1,18 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useSpring, a } from "@react-spring/web";
 import useMeasure from "react-use-measure";
-import { Container, Title, Frame, Content, toggle } from "./styles";
+import { Container, Title, Frame, Content, toggle} from "./styles";
 import * as Icons from "./icons";
-import './App.css';
 
 
+// Define the type for icon components in the Icons object
+type IconComponent = React.FC<{
+  style: React.CSSProperties;
+  onClick: () => void;
+}>;
 
-
+// Ensure that Icons object is correctly typed
+const typedIcons: { [key: string]: IconComponent } = Icons;
 
 
 function usePrevious<T>(value: T) {
@@ -35,13 +40,11 @@ const Tree = React.memo<
   });
   // @ts-ignore
   const Icon =
-    Icons[`${children ? (isOpen ? "Minus" : "Plus") : "Close"}SquareO`];
+    typedIcons[`${children ? (isOpen ? "Minus" : "Plus") : "Close"}SquareO`];
+    
   return (
     <Frame>
-      <Icon
-        style={{ ...toggle, opacity: children ? 1 : 0.3 }}
-        onClick={() => setOpen(!isOpen)}
-      />
+      <Icon style={{ ...toggle, opacity: children ? 1 : 0.3 }} onClick={() => setOpen(!isOpen)} />
       <Title style={style}>{name}</Title>
       <Content
         style={{
